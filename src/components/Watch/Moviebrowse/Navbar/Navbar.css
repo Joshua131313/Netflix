@@ -1,0 +1,181 @@
+.navbar img {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px
+}
+#root .navbar {
+  color: #fff;
+  padding: 20px 40px;
+  font-size: 14px;
+  transition: all 0.3s;
+  z-index: 1000;
+} 
+.navbar i {
+  color: #fff
+}
+.navbar a {
+  color: rgb(228, 228, 228);
+}
+.navbar a:hover {
+  color: rgb(192, 192, 192)
+}
+.leftlinks  {
+  gap: 15px
+}
+.navbar .activenavlink {
+  color: #fff;
+  pointer-events: none
+}
+.rightpartnav  {
+  gap: 20px
+}
+.profiledrop  {
+  gap: 10px
+}
+.scrollednav {
+  background-color: #141414
+}
+.browseresp {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+.browsecont {
+  transform: translateX(-30px)
+}
+.browsecont::after {
+  content: '';
+  width: 100%;
+  height: 70px;
+  position: absolute;
+  top:25px;
+  left: 0;
+}
+.search {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 200px;
+  height: 30px
+}
+.search i {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  transition: all 0.3s
+}
+.search input {
+  height: 30px;
+  background-color: transparent;
+  border: solid 1px #fff;
+  max-width: 0;
+  padding: 0;
+  opacity: 0;
+  transition: all 0.3s;
+  position: absolute;
+  right: 0;
+  padding-left: 30px;
+  color: #fff 
+}
+.search input::placeholder {
+  color: #fff
+}
+.activesearch input {
+  max-width: 200px;
+  opacity: 1;
+}
+.activesearch i {
+  transform: translateX(-165px)
+}
+.search .xs {
+  opacity: 0;
+  pointer-events: none
+}
+.activesearch .xs {
+  transform: initial;
+  right: 10px;
+  opacity: 1;
+  pointer-events: initial
+}
+.innermodal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 50px
+}
+
+.browsecont .navbardropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 260px;
+  background-color: rgba(0, 0, 0, 0.747);
+  border-top: solid 1px #fff;
+  top: 70px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.browsecont:hover .navbardropdown {
+  opacity: 1;
+  pointer-events: initial;
+  top: 40px
+}
+.browsecont .navbardropdown::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #fff transparent transparent transparent;
+  margin-left: 5px;
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  
+}
+.navbardropdown a {
+  padding: 15px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.navbardropdown a:hover {
+  background-color: rgba(70, 70, 70, 0.692)
+}
+.searchmodal {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #141414;
+  left: 0;
+  padding-top: 100px;
+  overflow-y: auto;
+  z-index: 101;
+}
+.leftpartnav {
+  z-index: 111;
+}
+.rightpartnav .search {
+  z-index: 111;
+}
+@media (max-width: 900px) {
+  .navbar .logo {
+    transform: scale(0.55)
+  }
+  .navbar a {
+    font-size: 12px;
+  }
+  .browseresp {
+    display: flex;
+  }
+  .leftlinks {
+    display: none
+  }
+}

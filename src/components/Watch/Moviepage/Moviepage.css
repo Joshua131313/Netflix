@@ -1,0 +1,184 @@
+
+.trailercont {
+  width: 700px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+.trailers {
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  max-width: 100%;
+  gap: 10px
+}
+.trailercont h2 {
+  color: #fff;
+  margin: 50px 0
+}
+.othertrailers {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  max-width: 100%;
+  gap: 10px;
+  justify-content: center
+}
+.trailercont .othertrailers  iframe {
+  height: calc(33% - 10px);
+  border-radius: 5px
+}
+.trailercont iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px
+}
+.circle {
+  width: 50px;
+  height: 50px;
+}
+.circle .CircularProgressbar .CircularProgressbar-text {
+  font-size: 25px;
+  user-select: none;
+  font-weight: bold
+}
+.leftpartmovie .moredetails  {
+  justify-content: flex-start
+}
+.moredetails  span:nth-last-of-type(2)::after, .moredetails  span:nth-last-of-type(2)::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  background-color: #fff;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -12px;
+  border-radius: 50%
+}
+.moredetails  span:nth-last-of-type(2)::before {
+  left: -12px;
+  right: initial
+}
+.upperleftpart {
+  gap: 20px;
+  display: flex;
+  flex-direction: column
+}
+.leftpartmovie  {
+  flex-direction: column;
+  color: #fff;
+  gap: 20px;
+  margin-top: 20px
+}
+.midpart {
+  display: flex;
+  font-size: 12px;
+  gap: 20px;
+  align-items: center;
+}
+.midpart i {
+  font-size: 15px;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  background-color: var(--theme-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%
+}
+.midpart i:hover {
+  color: var(--theme-color);
+  background-color: #fff
+}
+.midpart > div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center
+}
+.moviedetails {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.mainbgimgdetail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.mainbgimgdetail img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(65%)
+}
+.innermoviedetails  {
+  justify-content: flex-start;
+  gap: 30px;
+  padding: 30px
+}
+.imgpart {
+  width: 300px;
+  height: 90%;
+}
+.imgpart img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  border-radius: 5px
+}
+.upperleftpart span {
+  font-size: 12px;
+}
+.moredetails  {
+  gap: 20px;
+  flex-wrap: wrap
+}
+.leftpartmovie  {
+   max-width: 400px;
+}
+.movieperson {
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  color: #fff;
+  box-shadow: var(--shadow);
+  border-radius: 5px;
+  font-size: 12px;
+}
+.personimg {
+  height: 180px;
+  width: 100%
+}
+.personimg img {
+  width: 100%;
+  height: 100%
+}
+.personimg .imgskeltonload  {
+  border-radius: 5px
+}
+.persondetail {
+  padding: 15px;
+
+}
+@media (max-width: 720px) {
+
+  .moviedetails {
+    justify-content: center
+  }
+  .innermoviedetails  {
+    flex-direction: column;
+
+  }
+  .imgpart {
+    display: none
+  }
+  .imgpart img {
+    filter: brightness(50%);
+    height: 100%;
+  }
+}

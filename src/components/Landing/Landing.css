@@ -1,0 +1,136 @@
+.signinbtn {
+  padding: 10px 20px;
+}
+.landingheader {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+}
+.innerlandingbanner {
+  height: 100vh;
+}
+.landing {
+  background-color: #000
+}
+.landingimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-image: url(https://i.imgur.com/EnygUsO.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  filter: brightness(70%);
+}
+.landingimg, .asked {
+  border-bottom: 8px solid #222
+
+}
+.signin {
+  display: flex;
+  gap: 20px;
+  align-items: center
+}
+.signin button {
+  height: 30px;
+}
+.signin > div {
+  height: 30px
+}
+.lngselect {
+  padding: 5px;
+  background-color: transparent;
+  color: #fff;
+  border: solid 1px #fff;
+  padding-left: 20px;
+  height: 100%
+}
+select {
+  outline: none
+}
+.lngselect option {
+  color: #000
+}
+.lngselect + i {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff
+}
+.rdycontrols {
+  width: 80%
+}
+.rdycontrols .input {
+  width: 60%
+}
+.rdycontrols input {
+  width: 100%;
+  border-radius: 0
+}
+.rdycontrols button, .rdycontrols input {
+  height: 55px;
+  font-weight: bold
+}
+.landingtitle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%
+}
+.landingtitle, .extratext, .rdy {
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px
+}
+.rdy {
+  padding: 0 20px
+}
+.landingtitle h1 {
+  font-size: 39px
+}
+.accordions {
+  width: 600px;
+  max-width: 90%;
+  margin: 0 auto
+}
+.accordions .accordionsummary , .accordions .accordionsummary  i{
+  font-size: 25px
+}
+.accordioncont {
+  flex-direction: column;
+  gap: 30px
+}
+.asked {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 50px
+}
+
+.asked h1 {
+  margin: 50px 0;
+}
+.accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+.accordions p {
+  text-align: left;
+  font-size: 18px
+}
+.asked .rdy {
+  margin-top: 40px
+}
+.asked .rdy .rdycontrols {
+  justify-content: center;
+}
+@media (max-width: 650px) {
+  .accordions .accordionsummary , .accordions .accordionsummary  i{
+    font-size: 20px
+  }
+}

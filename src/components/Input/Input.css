@@ -1,0 +1,18 @@
+.input span {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: var(--gray-text);
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.input input:valid + span, .input input:focus + span{
+  top: 10px;
+  font-size: 12px;
+  color: #333
+}
+.input input {
+  border-radius: 5px
+}

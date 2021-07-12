@@ -1,0 +1,23 @@
+.innerallmovies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center
+}
+.allmovies {
+}
+.filtertitle {
+  display: flex;
+  gap: 30px;
+  align-items: center
+}
+.banner .select {
+  padding: 10px;
+  background-color: transparent;
+  color: #fff;
+  border: solid 1px #fff
+}
+.banner .select option {
+  color: #000
+}

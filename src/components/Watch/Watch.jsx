@@ -13,18 +13,31 @@ import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import Navbar from './Moviebrowse/Navbar/Navbar'
 import Allmovies from './Moviebrowse/Allmovies/Allmovies'
 import Moviepage from './Moviepage/Moviepage'
+import Tvpage from './Moviepage/Tvpage'
+import Episodepage from './Moviepage/Episodepage'
 const Watch = () => {
   const {watching, intheaters} = useContext(ContextApp)
   const location = useLocation()
+  let split = location.pathname.split('/')
   const renderMovieRoute = () => {
     
-    if(location.pathname.includes('watch')) {
+      const Tag = split[2]==='tv'?Tvpage:Moviepage
       return (
-        <Route path={`/watch/${location.pathname.split('/')[2]}`}>
-            <Moviepage movie={{id: location.pathname.split('/')[2]}} />
+        <Route exact path={`/watch/${split[2]}/${split[3]}`}>
+            <Tag tv={split[2]==='tv'?true:false} movie={{id: split[3]}} />
         </Route>
       )
-    }
+    
+  }
+  const renderEpisodeRoute = () => {
+    let show = split[3]
+    let episodenumber = split[5]
+    let season = split[4]
+    return (
+      <Route path={`/watch/tv/${show}/${season}/${episodenumber}`}>
+          <Episodepage show={show} season={season} episodenumber={episodenumber} />
+      </Route>
+    )
   }
   return (
     <div className='watch'>
@@ -38,9 +51,10 @@ const Watch = () => {
             <Movies type={'all'}/>
           </Route>
           <Route path='/watch/shows'>
+            <Allmovies tv type='shows' title='TV Shows'/>
           </Route>
           <Route path='/watch/movies'>
-              <Allmovies />
+              <Allmovies type='movies' title='Movies'/>
           </Route>
           <Route path='/watch/new-popular'>
             
@@ -49,6 +63,7 @@ const Watch = () => {
 
           </Route>
          {renderMovieRoute()}
+          {renderEpisodeRoute()}
         </Switch>
         </>
         : 

@@ -18,21 +18,27 @@ const Movies = (props) => {
     topratedmovies, 
     moviebrowse,
     tvdiscover,
-    saved
+    saved,
+    trending,
+    trendingtv
   } = useContext(ContextApp)
     const limit= 20
   return (
     <div className="movies">
-      <Banner  array={moviebrowse}/>
-      <Movielist movies={saved.slice(0, limit)} title='Saved Movies'/>
-      <Movielist movies={moviebrowse.slice(0, limit)} title='Movies'/>
-      <Movielist movies={mostpopularmovies.slice(0, limit)} title='Most Popular Movies'/>
-      <Movielist movies={topratedmovies.slice(0, limit)} title='Top Rated Movies'/>
-      <Movielist movies={coming.slice(0, limit)} title='Coming Soon'/>
-      <Movielist movies={intheaters.slice(0, limit)} title='In Theaters'/>
-      <Movielist movies={tvdiscover.slice(0, limit)} title='TV Shows'/>
-      <Movielist movies={mostpopulartv.slice(0, limit)} title='Most Popular TV Shows'/>
-      <Movielist movies={toptv.slice(0, limit)} title='Top TV Shows'/>
+      <Banner tv={false} array={moviebrowse}/>
+      {
+        saved.length !==0 &&
+        <Movielist movies={saved} title='Saved Movies'/>
+      }
+      <Movielist movies={trending} title='Trending Movies'/>
+      <Movielist movies={moviebrowse} title='Movies'/>
+      <Movielist movies={mostpopularmovies} title='Most Popular Movies'/>
+      <Movielist movies={topratedmovies} title='Top Rated Movies'/>
+      <Movielist movies={coming} title='Coming Soon'/>
+      <Movielist movies={intheaters} title='In Theaters'/>
+      <Movielist movies={tvdiscover} tv title='TV Shows'/>
+      <Movielist movies={mostpopulartv} tv title='Most Popular TV Shows'/>
+      <Movielist movies={toptv} tv title='Top TV Shows'/>
     </div>
   )
 }

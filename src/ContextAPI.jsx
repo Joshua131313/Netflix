@@ -20,7 +20,8 @@ export const ContextApp = createContext()
     const [coming, setComing] = useState([])
     const [intheaters, setIntheaters] = useState([])
     const [topratedmovies, setTopratedmovies] = useState([])
-
+    const [trending, setTrending] = useState([])
+    const [trendingtv, setTrendingtv] = useState([])
     //shows
     const [tvdiscover, setTvdiscover] = useState([])
     const [mostpopulartv, setMostpopulartv] = useState([])
@@ -78,20 +79,30 @@ useEffect(()=> {
       setIntheaters(resp.data.results)
     })
   }
-
+  if(trending.length === 0) {
+    axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=b500b7f81758d0ea6ef8e9df46c2718c').then(resp=> {
+      setTrending(resp.data.results)
+    })
+  }
+ 
   if(mostpopulartv.length === 0) {
-    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=20').then(resp=> {
+    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=1').then(resp=> {
       setMostpopulartv(resp.data.results)
     })
   }
   if(toptv.length === 0) {
-     axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=3').then(resp=> {
+     axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=1').then(resp=> {
        setToptv(resp.data.results)
      })
   }
   if(tvdiscover.length === 0) {
-    axios.get('https://api.themoviedb.org/3/discover/tv?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate').then(resp=> {
+    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=1').then(resp=> {
       setTvdiscover(resp.data.results)
+    })
+  }
+  if(trendingtv.length === 0) {
+    axios.get('https://api.themoviedb.org/3/trending/tv/day?api_key=b500b7f81758d0ea6ef8e9df46c2718c').then(resp=> {
+      setTrendingtv(resp.data.results)
     })
   }
   axios.get('https://api.themoviedb.org/3/movie/latest?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US').then(resp=> {
@@ -116,7 +127,9 @@ useEffect(()=> {
         topratedmovies,
         saved,
         moviebrowse,
-        tvdiscover
+        tvdiscover,
+        trending,
+        trendingtv
         
       }}>
       {props.children}

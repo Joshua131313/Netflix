@@ -145,7 +145,8 @@ input::-webkit-inner-spin-button {
 .loading {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  margin-top: 20px
 }
 
 .notifications-wrapper {
@@ -240,4 +241,37 @@ input::-webkit-inner-spin-button {
 .accordiontab .accordionsummary {
  box-shadow: none;
  border-radius: 0
+}
+details > summary {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: '\f067';
+  font-family: 'Font Awesome 5 Pro';
+  margin-right: 10px
+}
+
+details[open] > summary::before {
+  content: '\f068';
+  font-family: 'Font Awesome 5 Pro'
+}
+
+details {
+  border: solid 1px #fff;
+  color: #fff;
+  border-radius: 5px;
+  
+}
+
+details[open] > summary {
+
 }

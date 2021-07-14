@@ -8,7 +8,9 @@ import Imgloaded from '../../Reuseable/Imgloaded/Imgloaded';
 import Tabs from '../../Reuseable/Tabs/Tabs';
 import Movieperson from './Movieperson';
 import Addtofavorite from '../../Reuseable/Addtofavorite/Addtofavorite';
-const Moviepage = (props) => {
+import useGetepisodes from '../Moviecard/Getepisodes';
+import Season from './Season';
+const  Tvpage = (props) => {
 
   const {movie, tv} = props
   const details = useGetdetails(movie, tv)
@@ -68,6 +70,13 @@ const Moviepage = (props) => {
       content: castrow
     }
   ]
+
+  const seasonsrow = details?.seasons?.map(season=> {
+    return ( 
+      <Season season={season} show={movie}/>
+    )
+  })
+  console.log(details)
   return ( 
     
     <div className="moviepage">
@@ -81,17 +90,15 @@ const Moviepage = (props) => {
         </div>
         <div className="leftpartmovie flex">
           <div className="upperleftpart">
-          <h2>{details?.title}</h2>
+          <h2>{details?.name}</h2>
           <div className="moredetails flexrow">
-            <span>{details?.release_date}</span>
+            <span>{details?.first_air_date}</span>
             <span>
               {details?.genres?.map(genre=> {
                 return genre.name
               }).join(', ')}
             </span>
-            <span>
-              {timeConvert(details?.runtime)}
-            </span>
+            <span>Seasons: {details?.number_of_seasons}</span>
           </div>
           </div>
           <div className="about">
@@ -121,6 +128,12 @@ const Moviepage = (props) => {
         </div>
       </div>
       </div>
+      <div className="trailercont episodes">
+        <h2>Seasons & Episodes</h2>
+        <div className="seasonsrow">
+          {seasonsrow}
+        </div>
+      </div>
       <div className="trailercont">
       <h2>Trailers</h2>
 
@@ -144,4 +157,4 @@ const Moviepage = (props) => {
     </div>
   )
 } 
-export default Moviepage
+export default Tvpage

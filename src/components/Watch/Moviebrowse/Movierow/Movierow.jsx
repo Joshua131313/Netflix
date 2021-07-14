@@ -3,7 +3,7 @@ import ScrollMenu from 'react-horizontal-scrolling-menu';
 import Vmoviecard from '../../Moviecard/Vmoviecard';
 import './Movielist.css'
 const Movielist = (props) => {
-  const {movies, title} = props
+  const {movies, title, tv} = props
   
   const Arrow = ({text, className}) => {
     return (
@@ -12,7 +12,7 @@ const Movielist = (props) => {
   }
   const moviesrow = movies.map((movie, i)=> {
     return (
-      <Vmoviecard movie={movie} key={i}/>
+      <Vmoviecard tv={tv} movie={movie} key={i}/>
     )
   })
   const ArrowLeft = Arrow({text:'', className: 'fal fa-chevron-left'})

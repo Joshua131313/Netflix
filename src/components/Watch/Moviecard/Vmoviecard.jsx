@@ -7,14 +7,14 @@ import Addtofavorite from '../../Reuseable/Addtofavorite/Addtofavorite'
 import { ContextApp } from '../../../ContextAPI'
 import useGetdetails from './Getdetails'
 const VMoviecard = (props) => {
-  const {movie} = props
+  const {movie, tv} = props
   const {saved, intheaters} = useContext(ContextApp)
-  const details = useGetdetails(movie)
+  const details = useGetdetails(movie, tv)
   const link = '/watch/'
 
   return (
     <div className="vmoviecard" >
-        <Link to={`/watch/${movie.id}`}>
+        <Link to={`/watch/${tv?'tv':'movie'}/${movie.id}`}>
         <div className="vmovieimgvid">
         <Imgloaded alt={details?.title} img={details?.images?.posters[0]?.file_path} />
        </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { timeConvert } from '../../../Functions'
 import useGetdetails from '../Moviecard/Getdetails'
 import './Moviepage.css'
@@ -10,14 +10,28 @@ import Movieperson from './Movieperson';
 import Addtofavorite from '../../Reuseable/Addtofavorite/Addtofavorite';
 import useGetepisodes from '../Moviecard/Getepisodes';
 import Season from './Season';
+import { ContextApp } from '../../../ContextAPI';
+import firebase from 'firebase'
+import YouTube from 'react-youtube';
+import { db } from '../../../Fire';
+
 const  Tvpage = (props) => {
+  const {user, watching, watched} = useContext(ContextApp)
 
   const {movie, tv} = props
   const details = useGetdetails(movie, tv)
+  const opts = {
+    playerVars: {
+      allowFullScreen: 1
+    }
+  }
   const trailersrow = details?.videos?.results?.slice(0, 3).map(el=> {
     return (
-      <iframe allow='fullscreen' allowFullScreen={true} title='Video' src={`https://www.youtube.com/embed/${el.key}`} frameborder="0"></iframe>
-
+      <YouTube 
+        opts={opts}
+        videoId={el.key}
+        onEnd={()=> handleWatched()}
+      />
     )
   })
   const backdroprow = details?.images?.backdrops?.map(img=> {
@@ -76,7 +90,19 @@ const  Tvpage = (props) => {
       <Season season={season} show={movie}/>
     )
   })
-  console.log(details)
+  
+  const handleWatched = () => {
+    if(!watched.some(x=> x.id === movie.id)) {
+
+      db.collection('users').doc(user.uid).update({
+        watched: firebase.firestore.FieldValue.arrayUnion({
+          id: movie.id,
+          watching,
+          tv
+        })
+      })
+    }
+  }
   return ( 
     
     <div className="moviepage">
@@ -111,7 +137,7 @@ const  Tvpage = (props) => {
                <div className="circle">
               <CircularProgressbar 
                 value={(details?.vote_average*10)} 
-                text={details?.vote_average*10+'%'} 
+                text={(details?.vote_average*10)?.toFixed(0)+'%'} 
                 strokeWidth={5}
                 styles={buildStyles({
                   textColor: details?.vote_average>8?'var(--green)':(details?.vote_average<8 && details?.vote_average>6)?'yellow':'var(--red)',
@@ -138,8 +164,13 @@ const  Tvpage = (props) => {
       <h2>Trailers</h2>
 
           <div className="trailers">
-            <iframe allow='fullscreen' allowFullScreen={true} title='Video' src={`https://www.youtube.com/embed/${details?.videos?.results[0]?.key}`} frameborder="0"></iframe>
-            <div className="othertrailers">
+          <YouTube 
+              opts={opts}
+              videoId={details?.videos?.results[0]?.key}
+              id='maintrailer'
+              className='firsttrailer'
+              onEnd={()=> handleWatched()}
+              />            <div className="othertrailers">
                 {trailersrow}
             </div>
           </div>

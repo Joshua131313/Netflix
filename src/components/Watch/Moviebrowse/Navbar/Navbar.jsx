@@ -6,13 +6,15 @@ import Logo from '../../../Reuseable/Logo/Logo'
 import VMoviecard from '../../Moviecard/Vmoviecard'
 import Dropdown from './Dropdown'
 import './Navbar.css'
+import Notimovie from './Notimovie'
 import Search from './Search'
  
 const Navbar = () => {
-  const {profiles, watching} = useContext(ContextApp)
+  const {profiles, watching, setWatching, setEditing, handleLogout, setKids, intheaters} = useContext(ContextApp)
   const [scrolled, setScrolled] = useState(false)
   const [modal, setModal] = useState(false)
   const [searched, setSearched] = useState([])
+  const [accdrop, setAccdrop] = useState(false)
   const links = [
     {
       text: 'Home',
@@ -31,10 +33,22 @@ const Navbar = () => {
       link: 'new-popular'
     },
     {
+      text: 'Netflix Originals', 
+      link: 'netflix-originals'
+    }, 
+    {
       text: 'My List',
       link: 'saved'
     }
   ]
+  const profilesrow = profiles?.filter(x=> x.nameid !== watching).map(profile=> {
+    return (
+      <div onClick={()=> setWatching(profile.nameid)} className="profileswitch flex">
+        <img src={profile.img} alt=""/>
+        <span>{profile.name}</span>
+      </div>
+    )
+  })
   const linksrow = links.map(link=> {
     return (
       <NavLink exact activeClassName='activenavlink' to={`/watch/${link.link}`}>
@@ -47,11 +61,19 @@ const Navbar = () => {
       setScrolled(true)
     }
     else {
-      setScrolled(false)
+      setScrolled(false) 
     }
   }
+  const intheatersrow = intheaters?.slice(0, 10).map(el=> {
+    return (
+      <Notimovie movie={el}/>
+    )
+  })
   useEffect(()=> {
     document.addEventListener('scroll', handleScroll)
+    return  () => {
+      document.removeEventListener('scroll', handleScroll)
+    }
   }, [])
   return (
     <>
@@ -72,10 +94,30 @@ const Navbar = () => {
       <div className="rightpartnav flexrow">
         <Search searched={searched} setSearched={setSearched} modal={modal} setModal={setModal}/>
         <span>KIDS</span>
-        <i className="fa fa-bell"></i>
+        <div className="notidrop profiledrop">
+           <div className="bell">
+            <i className="fa fa-bell"></i>
+            <div className="bellred"></div>
+           </div>
+           <div className="noticont accountdropdown">
+            {intheatersrow}
+           </div>
+        </div>
         <div className='profiledrop flexrow'>
           <img src={findProfile(profiles, watching)?.img} alt=""/>
           <i className='fal fa-chevron-down'></i>
+          <div className="accountdropdown">
+            {profilesrow}
+            <span className="manageprofile" onClick={()=> {setWatching(''); setEditing(true)}}>
+              Manage Profiles
+            </span>
+            <span onClick={()=> setKids(prev=> !prev)} className="manageprofile" > 
+              Kids
+            </span>
+            <span onClick={()=> handleLogout()} className="manageprofile">
+              Sign out of Netflix Trailers
+            </span>
+          </div>
         </div>
       </div>
       

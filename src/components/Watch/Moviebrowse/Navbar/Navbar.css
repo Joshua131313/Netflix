@@ -8,7 +8,7 @@
   padding: 20px 40px;
   font-size: 14px;
   transition: all 0.3s;
-  z-index: 1000;
+  z-index: 1100;
 } 
 .navbar i {
   color: #fff
@@ -30,7 +30,28 @@
   gap: 20px
 }
 .profiledrop  {
-  gap: 10px
+  gap: 10px;
+  cursor: pointer;
+}
+.profiledrop::after, .bell::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  height: 50px;
+  width: 100%;
+}
+.bell::after { 
+  width: 50px;
+  left: -20px
+}
+.profiledrop:hover .accountdropdown {
+  top: 50px;
+  opacity: 1;
+  pointer-events: initial;
+  cursor: initial
+}
+.notidrop:hover .accountdropdown {
+  top: 30px
 }
 .scrollednav {
   background-color: #141414
@@ -169,8 +190,69 @@
 .rightpartnav .search {
   z-index: 111;
 }
+.profiledrop:hover i:not(.fa-bell) {
+  transform: rotate(180deg)
+}
+.manageprofile:hover {
+  text-decoration: underline
+}
+.accountdropdown {
+  position: absolute;
+  top: 100px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--overlay);
+  width: 220px;
+  padding: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s;
+  right: 0;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.bellred {
+  position: absolute;
+  top: -1px;
+  right: -3px;
+  width: 9px;
+  height: 9px;
+  background-color: var(--theme-color);
+  display: block;
+  border-radius: 50%
+}
+.noticont {
+  width: 300px;
+}
+.notimovie  {
+  gap: 10px;
+}
+.notimovie .leftnoti {
+  min-width: 80px;
+  max-width: 80px;
+}
+.rightnoti {
+  display: flex;
+  align-items: center
+}
+.leftnoti img {
+  width: 100%;
+  height: 100%
+}
+.profileswitch  {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+}
+
+.profileswitch:hover span {
+  text-decoration: underline
+}
 @media (max-width: 900px) {
-  .banner button {
+  .banner button, .leftcontrolsm button {
     font-size: 13px;
     height: 30px;
     min-width: 80px;
@@ -213,7 +295,7 @@
    width: 40%;
    transform: scale(0.7);
  }
- .navbar .rightpartnav > span, .profiledrop i{
+ .navbar .rightpartnav > span, .profiledrop i:not(.fa-bell){
   display: none
   }
   html, body {

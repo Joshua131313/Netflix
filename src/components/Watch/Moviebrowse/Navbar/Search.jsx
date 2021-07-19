@@ -21,7 +21,7 @@ const Search = (props) => {
     })
     setModal(true)
      
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&query=${location.search.split('?search=')[1]}&page=1&include_adult=false`)
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&query=${location.search.split('?search=')[1]}&page=${page}&include_adult=false`)
     .then((resp)=> { 
       setSearched([...resp.data.results])
       setLoading(false)

@@ -6,27 +6,32 @@ import './Allmovies.css'
 import ReactLoading from 'react-loading';
 import Loading from '../../../Reuseable/Loading/Loading'
 
-const Allmovies = (props) => {
-  const { title} = props
-  const [movies, setMovies] = useState([])
+const Alltvshows = (props) => {
+  const {title} = props
+  const [tvshows, setTvshows] = useState([])
+  const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [filter, setFilter] = useState('All')
-  const moviesrow = movies?.filter(x=> x.genre_ids.some(x=> x == filter) || filter === 'All').map(movie=> {
+  const moviesrow = tvshows?.filter(x=> x.genre_ids.some(x=> x == filter) || filter === 'All').map(movie=> {
     return (
-      <VMoviecard  movie={movie} /> 
+      <VMoviecard tv={true} movie={movie} /> 
     )
   })
-  
+
   useEffect(()=> {  
-   
-      axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`)
-      .then((resp)=> {
-        setMovies([...movies, ...resp.data.results])
+    setLoading(true)
+ 
+      axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=${page}`).then(resp=> {
+        setTvshows([...tvshows, ...resp.data.results])
+        setLoading(false)
       })
+
       .catch(err=> {
         console.log(err)
+        setLoading(false)
+
       })
-   
+    
   }, [page])
   const infinitScroll = () => {
     if((window.innerHeight + window.scrollY+30) >= document.body.offsetHeight) {
@@ -40,7 +45,7 @@ const Allmovies = (props) => {
   return (
     <div className="allmovies">
 
-      <Banner  filter={filter} setFilter={setFilter} array={movies} showfilter={true} filtertitle={title}/>
+      <Banner tv={true} filter={filter} setFilter={setFilter} array={tvshows} showfilter={true} filtertitle={title}/>
  
       <div className="innerallmovies">
         {moviesrow}
@@ -49,4 +54,4 @@ const Allmovies = (props) => {
     </div>
   )
 }
-export default Allmovies
+export default Alltvshows

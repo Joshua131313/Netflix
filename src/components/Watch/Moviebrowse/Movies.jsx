@@ -5,6 +5,7 @@ import './Movies.css'
 import Moviecard from '../Moviecard/Moviecard'
 import { ContextApp } from '../../../ContextAPI'
 import Movielist from './Movierow/Movierow'
+import Topcard from '../Moviecard/Topcard'
 const Movies = (props) => {
     const {type, title} = props
 
@@ -20,22 +21,32 @@ const Movies = (props) => {
     tvdiscover,
     saved,
     trending,
-    trendingtv
+    trendingtv,
+    netflixshows,
+    topten,
+    watching,
+    watched
   } = useContext(ContextApp)
-    const limit= 20
+
   return (
     <div className="movies">
       <Banner tv={false} array={moviebrowse}/>
+      { 
+        watched.filter(x=> x.watching === watching).length !==0 &&
+        <Movielist movies={watched.filter(x=> x.watching === watching)} title='Watch Again'/>
+      }
       {
-        saved.length !==0 &&
-        <Movielist movies={saved} title='Saved Movies'/>
+        saved.filter(x=> x.watching === watching).length !==0 &&
+        <Movielist movies={saved.filter(x=> x.watching === watching)} title='Saved Movies & TV Shows'/>
       }
       <Movielist movies={trending} title='Trending Movies'/>
       <Movielist movies={moviebrowse} title='Movies'/>
       <Movielist movies={mostpopularmovies} title='Most Popular Movies'/>
       <Movielist movies={topratedmovies} title='Top Rated Movies'/>
+      <Movielist Component={Topcard} movies={topten.slice(0, 10)} title='Top 10 Movies'/>
       <Movielist movies={coming} title='Coming Soon'/>
       <Movielist movies={intheaters} title='In Theaters'/>
+      <Movielist movies={netflixshows} tv title='Netflix Originals'/>
       <Movielist movies={tvdiscover} tv title='TV Shows'/>
       <Movielist movies={mostpopulartv} tv title='Most Popular TV Shows'/>
       <Movielist movies={toptv} tv title='Top TV Shows'/>

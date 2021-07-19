@@ -16,12 +16,15 @@ const Banner = (props) => {
   const [details, setDetails] = useState({})
   const [bannermovie, setBannermovie] = useState('')
   useEffect(()=> {
-    if(bannermovie.id) {
+ 
       axios.get(`https://api.themoviedb.org/3/${tv?'tv':'movie'}/${bannermovie.id}?api_key=b500b7f81758d0ea6ef8e9df46c2718c&append_to_response=videos,images`).then(resp=> {
         setDetails(resp.data)
       })
-    }
-  }, [bannermovie])
+      .catch(()=> {
+
+      })
+     
+  }, [bannermovie, tv])
   useEffect(()=> {
     if(!bannermovie) { 
       if(tv) {
@@ -29,9 +32,9 @@ const Banner = (props) => {
       }
       else { 
         setBannermovie(coming[Math.floor(Math.random()*coming.length)])
-      }
+      }  
     } 
-  }, [coming, bannermovie])
+  }, [coming, bannermovie, tv])
 
   return ( 
     <div className="banner">

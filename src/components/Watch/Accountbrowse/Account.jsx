@@ -6,8 +6,7 @@ import Logo from '../../Reuseable/Logo/Logo'
 import firebase from 'firebase'
 import Lngselect from '../../Select/Lngselect'
 const Account = () => {
-  const {profiles, user, setWatching, watching} = useContext(ContextApp)
-  const [editing, setEditing] = useState('')
+  const {profiles, user, setWatching, watching, editing, setEditing} = useContext(ContextApp)
   const [profile, setProfile] = useState({
     name: '', 
     img: ''

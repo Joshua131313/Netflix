@@ -41,3 +41,16 @@ export function timeConvert(num)
   var minutes = num % 60;
   return hours+'h '+minutes+'m';         
 }
+
+export function convertDate(date, noyear) {
+  if(noyear) {
+    return (
+      date.toLocaleString('en-US', { month: 'long', day: 'numeric', weekday: 'long' })
+    )
+  }
+  else {
+    return (
+      date.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    )
+  }
+}

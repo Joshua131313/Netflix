@@ -12,9 +12,13 @@ import Account from './Accountbrowse/Account'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 import Navbar from './Moviebrowse/Navbar/Navbar'
 import Allmovies from './Moviebrowse/Allmovies/Allmovies'
+import Alltvshows from './Moviebrowse/Allmovies/Alltvshows'
 import Moviepage from './Moviepage/Moviepage'
 import Tvpage from './Moviepage/Tvpage'
 import Episodepage from './Moviepage/Episodepage'
+import Popular from './Moviebrowse/Allmovies/Popular'
+import Netflixoriginals from './Moviebrowse/Allmovies/Netflixoriginals'
+import Mylist from './Moviebrowse/Allmovies/Mylist'
 const Watch = () => {
   const {watching, intheaters} = useContext(ContextApp)
   const location = useLocation()
@@ -51,16 +55,19 @@ const Watch = () => {
             <Movies type={'all'}/>
           </Route>
           <Route path='/watch/shows'>
-            <Allmovies tv type='shows' title='TV Shows'/>
+            <Alltvshows tv type='shows' title='TV Shows'/>
           </Route>
           <Route path='/watch/movies'>
               <Allmovies type='movies' title='Movies'/>
           </Route>
           <Route path='/watch/new-popular'>
-            
+            <Popular title='New & Popular'/>
+          </Route>
+          <Route path='/watch/netflix-originals'>
+            <Netflixoriginals title='Netflix Originals' />
           </Route>
           <Route path='/watch/saved'>
-
+            <Mylist title='Saved Movies & TV Shows'/>
           </Route>
          {renderMovieRoute()}
           {renderEpisodeRoute()}

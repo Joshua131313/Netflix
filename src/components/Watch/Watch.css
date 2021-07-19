@@ -67,6 +67,7 @@
   cursor: auto;
   font-weight: bold
 }
+
 .watching button, .outline {
   background-color: transparent;
   border: solid 1px grey;

@@ -1,7 +1,37 @@
-.vmoviecard {
+.vmoviecard, .topmoviecard {
   border-radius: 5px;
   height: 265px;
   width: 180px
+}
+.topmoviecard {
+  width: auto;
+  margin: 0 15px
+}
+.topmoviecard > * {
+  width: 100%
+}
+.imgsection {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  min-width: 200px;
+}
+.imgsection img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px
+}
+
+.topmoviecard .index {
+  font-size: 60px;
+  color: #000;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 250px;
+  align-items: center;
+  font-weight: bold;
+  -webkit-text-stroke: 6px #333;
+
 }
 .vmovieimgvid {
   width: 100%;
@@ -26,14 +56,14 @@
   opacity: 0;
   transform: scale(0.8)
 }
-.vmoviecard:hover .vmoviecontrols i {
+.vmoviecard:hover .vmoviecontrols i, .imgsection:hover  .vmoviecontrols i {
   transform: translateY(-20px) scale(1.2);
   opacity: 1;
 }
-.vmoviecard:hover .vmoviecontrols i:nth-of-type(2) {
+.vmoviecard:hover .vmoviecontrols i:nth-of-type(2), .imgsection:hover .vmoviecontrols i:nth-of-type(2) {
   transition-delay: 0.1s
 }
-.vmoviecard:hover .vmoviecontrols i:nth-of-type(3) {
+.vmoviecard:hover .vmoviecontrols i:nth-of-type(3), .imgsection:hover .vmoviecontrols i:nth-of-type(3) {
   transition-delay: 0.12s
 }
 .movielist h2 {
@@ -61,7 +91,7 @@
   transition: all 0.3s;
   pointer-events: none;
 }
-.vmoviecard i {
+.vmoviecontrols i {
   color: rgb(216, 216, 216);
   width: 24px;
   height: 24px;
@@ -72,7 +102,7 @@
   border-radius: 50%;
   font-size: 12px
 }
-.vmoviecard i:hover {
+.vmoviecontrols i:hover {
   color: #fff;
   border: solid 2px #fff
 }
@@ -99,12 +129,12 @@
 .btmsect .green {
   color: var(--green)
 }
-.vmoviecard .fa-play {
+.vmoviecontrols .fa-play {
   background-color: var(--theme-color);
   color: #fff;
   border: solid 1px transparent
 }
-.vmoviecard .fa-play:hover {
+.vmoviecontrols .fa-play:hover {
   color: var(--theme-color);
   background-color: #fff
 

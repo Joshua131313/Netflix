@@ -6,26 +6,26 @@ import './Allmovies.css'
 import ReactLoading from 'react-loading';
 import Loading from '../../../Reuseable/Loading/Loading'
 
-const Allmovies = (props) => {
+const Netflixoriginals = (props) => {
   const { title} = props
   const [movies, setMovies] = useState([])
   const [page, setPage] = useState(1)
   const [filter, setFilter] = useState('All')
   const moviesrow = movies?.filter(x=> x.genre_ids.some(x=> x == filter) || filter === 'All').map(movie=> {
     return (
-      <VMoviecard  movie={movie} /> 
+      <VMoviecard tv  movie={movie} /> 
     )
   })
   
   useEffect(()=> {  
    
-      axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`)
+      axios.get(`https://api.themoviedb.org/3/discover/tv?with_networks=213&api_key=b500b7f81758d0ea6ef8e9df46c2718c&page=${page}`)
       .then((resp)=> {
         setMovies([...movies, ...resp.data.results])
       })
       .catch(err=> {
-        console.log(err)
       })
+
    
   }, [page])
   const infinitScroll = () => {
@@ -49,4 +49,4 @@ const Allmovies = (props) => {
     </div>
   )
 }
-export default Allmovies
+export default Netflixoriginals

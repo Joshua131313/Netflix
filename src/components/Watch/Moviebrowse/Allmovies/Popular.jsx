@@ -6,26 +6,31 @@ import './Allmovies.css'
 import ReactLoading from 'react-loading';
 import Loading from '../../../Reuseable/Loading/Loading'
 
-const Allmovies = (props) => {
+const Popular = (props) => {
   const { title} = props
-  const [movies, setMovies] = useState([])
+  const [popular, setPopular] = useState([])
+  const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [filter, setFilter] = useState('All')
-  const moviesrow = movies?.filter(x=> x.genre_ids.some(x=> x == filter) || filter === 'All').map(movie=> {
+  const popularrow = popular?.filter(x=> x.genre_ids.some(x=> x == filter) || filter === 'All').map(movie=> {
     return (
-      <VMoviecard  movie={movie} /> 
+      <VMoviecard tv={movie.media_type==='tv'}  movie={movie} /> 
     )
   })
   
   useEffect(()=> {  
+    setLoading(true)
    
-      axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`)
+      axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=b500b7f81758d0ea6ef8e9df46c2718c&page=${page}`)
       .then((resp)=> {
-        setMovies([...movies, ...resp.data.results])
+        setPopular([...popular, ...resp.data.results])
+        setLoading(false)
       })
       .catch(err=> {
         console.log(err)
+        setLoading(false)
       })
+
    
   }, [page])
   const infinitScroll = () => {
@@ -40,13 +45,13 @@ const Allmovies = (props) => {
   return (
     <div className="allmovies">
 
-      <Banner  filter={filter} setFilter={setFilter} array={movies} showfilter={true} filtertitle={title}/>
+      <Banner  filter={filter} setFilter={setFilter} array={popular} showfilter={true} filtertitle={title}/>
  
       <div className="innerallmovies">
-        {moviesrow}
+        {popularrow}
       </div>
       <Loading loading={true} type='spin'/>
     </div>
   )
 }
-export default Allmovies
+export default Popular

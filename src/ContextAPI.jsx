@@ -13,7 +13,10 @@ export const ContextApp = createContext()
     const [saved, setSaved] = useState([])
     const [watching, setWatching] = useState('')
     const [bannermovie, setBannermovie] = useState({})
+    const [editing, setEditing] = useState('')
+    const [watched, setWatched] = useState([])
     //movies
+    const [topten, setTopten] = useState([])
     const [moviebrowse,  setMoviebrowse] = useState([])
     const [mostpopularmovies, setMostpopularmovies] = useState([]) 
     const [lastestmovies, setLatestmovies] = useState([])
@@ -26,7 +29,13 @@ export const ContextApp = createContext()
     const [tvdiscover, setTvdiscover] = useState([])
     const [mostpopulartv, setMostpopulartv] = useState([])
     const [toptv, setToptv] = useState([])
-  
+    const [netflixshows, setNetflixshows] = useState([])
+    const [kids, setKids] = useState(false)
+    const handleLogout = () =>{   
+      firebase.auth().signOut()
+      window.location.reload()
+    }
+   
     const authListener = () => {
       firebase.auth().onAuthStateChanged(user=>{
         if(user) {
@@ -42,6 +51,7 @@ useEffect(()=> {
     const userdata = snap.data()
     setProfiles(userdata.people)
     setSaved(userdata.saved)
+    setWatched(userdata.watched)
   })
 }, [user])
 useEffect(()=> {
@@ -50,13 +60,16 @@ useEffect(()=> {
 useEffect(()=> {
      authListener()
 }, []) 
-useEffect(()=> {
 
-}, [])
 useEffect(()=> {
   if(topratedmovies.length === 0) {
     axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=1').then(resp=> {
       setTopratedmovies(resp.data.results)
+    })
+  }
+  if(topten.length === 0) {
+    axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=2').then(resp=> {
+      setTopten(resp.data.results)
     })
   }
   if(moviebrowse.length === 0) {
@@ -86,7 +99,7 @@ useEffect(()=> {
   }
  
   if(mostpopulartv.length === 0) {
-    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=1').then(resp=> {
+    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US&page=2').then(resp=> {
       setMostpopulartv(resp.data.results)
     })
   }
@@ -103,6 +116,12 @@ useEffect(()=> {
   if(trendingtv.length === 0) {
     axios.get('https://api.themoviedb.org/3/trending/tv/day?api_key=b500b7f81758d0ea6ef8e9df46c2718c').then(resp=> {
       setTrendingtv(resp.data.results)
+    })
+  }
+  if(netflixshows.length === 0) {
+    axios.get('https://api.themoviedb.org/3/discover/tv?with_networks=213&api_key=b500b7f81758d0ea6ef8e9df46c2718c&page=1').then(resp=> {
+      setNetflixshows(resp.data.results)
+      console.log(resp.data.results) 
     })
   }
   axios.get('https://api.themoviedb.org/3/movie/latest?api_key=b500b7f81758d0ea6ef8e9df46c2718c&language=en-US').then(resp=> {
@@ -129,8 +148,17 @@ useEffect(()=> {
         moviebrowse,
         tvdiscover,
         trending,
-        trendingtv
-        
+        trendingtv,
+        netflixshows,
+        editing, 
+        setEditing,
+        handleLogout,
+        kids,
+        setKids,
+        topten,
+        watched, 
+        setWatched
+         
       }}>
       {props.children}
   </ContextApp.Provider>

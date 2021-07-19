@@ -96,7 +96,7 @@ const Episodepage = (props) => {
                <div className="circle">
               <CircularProgressbar 
                 value={(details?.vote_average*10)} 
-                text={details?.vote_average*10+'%'} 
+                text={(details?.vote_average*10)?.toFixed(0)+'%'} 
                 strokeWidth={5}
                 styles={buildStyles({
                   textColor: details?.vote_average>8?'var(--green)':(details?.vote_average<8 && details?.vote_average>6)?'yellow':'var(--red)',

@@ -1,6 +1,6 @@
 
 .trailercont {
-  width: 700px;
+  width: 1000px;
   max-width: 90%;
   margin: 0 auto;
 }
@@ -21,13 +21,15 @@
   width: 200px;
   max-width: 100%;
   gap: 10px;
-  justify-content: center
+  justify-content: space-between;
+  overflow-y: auto
+
 }
 .trailercont .othertrailers  iframe {
-  height: calc(33% - 10px);
+  height: 100%;
   border-radius: 5px
 }
-.trailercont iframe {
+.trailercont iframe, .trailercont .firsttrailer {
   width: 100%;
   height: 100%;
   border-radius: 10px
@@ -118,7 +120,8 @@
 .innermoviedetails  {
   justify-content: flex-start;
   gap: 30px;
-  padding: 30px
+  padding: 30px;
+  margin: 0 auto;
 }
 .imgpart {
   width: 300px;
@@ -152,7 +155,7 @@
 }
 .personimg {
   height: 180px;
-  width: 100%
+  width: 150px
 }
 .personimg img {
   width: 100%;
@@ -195,6 +198,10 @@
 .num {
   margin-right: 5px;
 }
+.trailers > div:first-of-type {
+  width: 100%
+}
+
 @media (max-width: 720px) {
 
   .moviedetails {
@@ -215,18 +222,20 @@
     flex-direction: column;
     height: auto
   }
-  .trailers >  iframe:first-of-type {
+
+  .trailers  .firsttrailer{
     height: 400px
   }
   .othertrailers {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+
   }
   .trailercont .othertrailers iframe {
     width: 200px;
-    height: 200px
+    height: 100%;
   }
   .tablink {
     font-size: 11px

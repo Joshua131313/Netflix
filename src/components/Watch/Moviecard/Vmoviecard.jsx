@@ -15,16 +15,16 @@ const VMoviecard = (props) => {
   return (
     <div className="vmoviecard" >
         <Link to={`/watch/${tv?'tv':'movie'}/${movie.id}`}>
-        <div className="vmovieimgvid">
-        <Imgloaded alt={details?.title} img={details?.images?.posters[0]?.file_path} />
-       </div>
+          <div className="vmovieimgvid">
+          <Imgloaded alt={details?.title} img={details?.images?.posters[0]?.file_path} />
+          </div>
         </Link>
         
         <div className="vmoviecontrols">
-            <Link to={`/watch/${movie.id}`}> 
+          <Link to={`/watch/${tv?'tv':'movie'}/${movie.id}`}>
               <i className={'fal fa-play'}></i> 
              </Link>
-            <Addtofavorite id={movie.id} issaved={saved.some(x=> x.id === movie.id)} className={`fa${saved.some(x=> x.id === movie.id)?'':'l'} fa-heart`} Tag={'i'}/>
+            <Addtofavorite tv={tv} id={movie.id} issaved={saved.some(x=> x.id === movie.id)} className={`fa${saved.some(x=> x.id === movie.id)?'':'l'} fa-heart`} Tag={'i'}/>
            <i className={`fal fa-download`}></i>
          </div>
     </div>
